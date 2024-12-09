@@ -1,6 +1,6 @@
 # Openmart Table
 
-This is testing project, implemented a table with batch update feature.
+This is testing project, implemented a table with batch update and infinite scroll features.
 
 ## Tech Stack
 
