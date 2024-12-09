@@ -31,6 +31,6 @@ npm run dev
 - Fill in the form with the new data.
 - Click the "Submit" button to update the selected businesses.
 
-## live demo
+## Live demo
 
 https://omtable-git-main-geforcesongs-projects.vercel.app/
