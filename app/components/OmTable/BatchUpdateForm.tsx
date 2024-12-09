@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/form";
 import OmButton from "@/components/ui/OmButton";
 import { Input } from "@/components/ui/input";
-import { useEffect } from "react";
 import { useBatchUpdateBusinesses } from "@/client/hooks/useBatchUpdateBusinesses";
 
 type Props = {
@@ -42,13 +41,10 @@ export const BatchUpdateForm: React.FC<Props> = ({ ids, open, onClose }) => {
 
   const { mutate: updateBusinesses, isPending } = useBatchUpdateBusinesses({
     onSuccess: () => {
+      form.reset(defaultValues);
       onClose?.();
     },
   });
-
-  useEffect(() => {
-    form.reset(defaultValues);
-  }, [open]);
 
   function onSubmit(values: z.infer<typeof BusinessUpdateFormSchema>) {
     updateBusinesses({
@@ -58,10 +54,16 @@ export const BatchUpdateForm: React.FC<Props> = ({ ids, open, onClose }) => {
   }
 
   return (
-    <Dialog open={open} onOpenChange={onClose}>
+    <Dialog
+      open={open}
+      onOpenChange={() => {
+        form.reset(defaultValues);
+        onClose?.();
+      }}
+    >
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Batch Update - {ids.length} businesses</DialogTitle>
+          <DialogTitle>Batch Update - {ids.length}</DialogTitle>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
