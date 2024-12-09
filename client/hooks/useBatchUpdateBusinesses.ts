@@ -13,7 +13,7 @@ export const useBatchUpdateBusinesses = (
     mutationFn: (params) => updateBusinesses(params),
     ...options,
     onSuccess(data, variables, context) {
-      queryClient.invalidateQueries({ queryKey: ["businesses"] });
+      queryClient.refetchQueries({ queryKey: ["businesses"] });
       options?.onSuccess?.(data, variables, context);
     },
   });
