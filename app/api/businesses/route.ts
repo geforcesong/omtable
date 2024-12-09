@@ -41,4 +41,25 @@ const GET = apiHandler(async (request: NextRequest) => {
   );
 });
 
-export { GET };
+const PUT = apiHandler(async (request: NextRequest) => {
+  const { ids, businessData } = await request.json();
+  if (!Array.isArray(ids) || ids.length === 0 || !businessData) {
+    throw new Error("No businesses to update");
+  }
+
+  const updateFields = Object.keys(businessData).map(
+    (key, index) => `${key} = $${index + 1}`
+  );
+  const updateValues = Object.values(businessData);
+  const idsPlaceholders = ids
+    .map((_, index) => `$${index + 1 + updateValues.length}`)
+    .join(",");
+
+  const queryText = `UPDATE public."Business" SET ${updateFields.join(
+    ", "
+  )} WHERE id IN (${idsPlaceholders})`;
+  await pool.query(queryText, [...updateValues, ...ids]);
+  return NextResponse.json(new ApiResponse(null));
+});
+
+export { GET, PUT };
