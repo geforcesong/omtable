@@ -30,3 +30,7 @@ npm run dev
 - Click the "Batch Update" button to open the batch update form.
 - Fill in the form with the new data.
 - Click the "Submit" button to update the selected businesses.
+
+## live demo
+
+https://omtable-git-main-geforcesongs-projects.vercel.app/
