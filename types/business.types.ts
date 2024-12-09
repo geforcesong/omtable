@@ -8,3 +8,8 @@ export type Business = {
   location: string | null;
   count?: number | null;
 };
+
+export type BusinessData = Pick<
+  Business,
+  "url" | "location" | "retailer_name" | "count"
+>;
