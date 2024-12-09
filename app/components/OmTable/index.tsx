@@ -37,7 +37,7 @@ export const OmTable: React.FC = () => {
         observer.current.observe(element);
       }
     },
-    [hasNextPage]
+    [hasNextPage, fetchNextPage, isFetchingNextPage]
   );
 
   if (!tableData?.length && status === "pending") return <div>Loading...</div>;
@@ -48,9 +48,24 @@ export const OmTable: React.FC = () => {
         <div>
           Selected: {selectedIds.length} / {data?.pages[0]?.totalCount}
         </div>
-        <OmButton disabled={!selectedIds?.length} onClick={() => setOpen(true)}>
-          Batch Update
-        </OmButton>
+        <div className="flex gap-5">
+          {!!selectedIds.length && (
+            <OmButton
+              disabled={!selectedIds?.length}
+              onClick={() => setSelectedIds([])}
+              variant="link"
+            >
+              Cancel
+            </OmButton>
+          )}
+
+          <OmButton
+            disabled={!selectedIds?.length}
+            onClick={() => setOpen(true)}
+          >
+            Batch Update
+          </OmButton>
+        </div>
       </div>
 
       <div className="relative">
