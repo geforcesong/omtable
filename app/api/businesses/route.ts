@@ -1,4 +1,3 @@
-import { pool } from "@/server/dbPool";
 import { businessFactory } from "@/server/factories/BusinessFactory";
 import { apiHandler } from "@/server/services/apiHandler";
 import ApiResponse from "@/server/services/apiResponse";
