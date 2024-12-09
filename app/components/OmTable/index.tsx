@@ -11,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { BatchUpdateForm } from "./BatchUpdateForm";
 
 export const OmTable: React.FC = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
@@ -18,6 +19,7 @@ export const OmTable: React.FC = () => {
   const tableData = data?.pages.flatMap((page) => page.businesses) || [];
   const observer = useRef<IntersectionObserver | null>(null);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [open, setOpen] = useState(false);
 
   const lastItemRef = useCallback(
     (element: HTMLElement | null) => {
@@ -46,7 +48,9 @@ export const OmTable: React.FC = () => {
         <div>
           Selected: {selectedIds.length} / {data?.pages[0]?.totalCount}
         </div>
-        <OmButton disabled={!selectedIds?.length}>Batch Update</OmButton>
+        <OmButton disabled={!selectedIds?.length} onClick={() => setOpen(true)}>
+          Batch Update
+        </OmButton>
       </div>
 
       <div className="relative">
@@ -103,6 +107,7 @@ export const OmTable: React.FC = () => {
           <div className="text-center">Loading more...</div>
         )}
       </div>
+      <BatchUpdateForm open={open} onClose={() => setOpen(false)} />
     </div>
   );
 };
