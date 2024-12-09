@@ -61,7 +61,7 @@ export const BatchUpdateForm: React.FC<Props> = ({ ids, open, onClose }) => {
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Batch Update</DialogTitle>
+          <DialogTitle>Batch Update - {ids.length} businesses</DialogTitle>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField

@@ -110,7 +110,10 @@ export const OmTable: React.FC = () => {
       <BatchUpdateForm
         ids={selectedIds}
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={() => {
+          setOpen(false);
+          setSelectedIds([]);
+        }}
       />
     </div>
   );
