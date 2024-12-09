@@ -1,3 +1,9 @@
+import { OmTable } from "./components/OmTable";
+
 export default function Home() {
-  return <div>home</div>;
+  return (
+    <div>
+      <OmTable />
+    </div>
+  );
 }
