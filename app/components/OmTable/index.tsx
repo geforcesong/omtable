@@ -107,7 +107,11 @@ export const OmTable: React.FC = () => {
           <div className="text-center">Loading more...</div>
         )}
       </div>
-      <BatchUpdateForm open={open} onClose={() => setOpen(false)} />
+      <BatchUpdateForm
+        ids={selectedIds}
+        open={open}
+        onClose={() => setOpen(false)}
+      />
     </div>
   );
 };
