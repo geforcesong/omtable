@@ -10,6 +10,6 @@ export const useInfiniteBusinesses = () => {
         ? lastPage.currentPage + 1
         : undefined;
     },
-    initialPageParam: 1, // 初始页参数
+    initialPageParam: 1,
   });
 };
