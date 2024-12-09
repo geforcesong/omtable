@@ -14,6 +14,8 @@ export const useBatchUpdateBusinesses = (
     ...options,
     onSuccess(data, variables, context) {
       queryClient.refetchQueries({ queryKey: ["businesses"] });
+      // // queryClient.invalidateQueries({ queryKey: ["businesses"] });
+      // queryClient.refetchQueries({ queryKey: ["businesses"], type: "active" });
       options?.onSuccess?.(data, variables, context);
     },
   });

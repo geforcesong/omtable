@@ -20,11 +20,12 @@ import {
 import OmButton from "@/components/ui/OmButton";
 import { Input } from "@/components/ui/input";
 import { useBatchUpdateBusinesses } from "@/client/hooks/useBatchUpdateBusinesses";
+import { BusinessData } from "@/types/business.types";
 
 type Props = {
   open: boolean;
   ids: string[];
-  onClose?: () => void;
+  onClose?: (newBusinessData: BusinessData | null) => void;
 };
 
 const defaultValues = {
@@ -42,8 +43,9 @@ export const BatchUpdateForm: React.FC<Props> = ({ ids, open, onClose }) => {
 
   const { mutate: updateBusinesses, isPending } = useBatchUpdateBusinesses({
     onSuccess: () => {
+      const newBusinessData = form.getValues();
       form.reset(defaultValues);
-      onClose?.();
+      onClose?.(newBusinessData);
     },
   });
 
@@ -59,7 +61,7 @@ export const BatchUpdateForm: React.FC<Props> = ({ ids, open, onClose }) => {
       open={open}
       onOpenChange={() => {
         form.reset(defaultValues);
-        onClose?.();
+        onClose?.(null);
       }}
     >
       <DialogContent>
