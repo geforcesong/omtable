@@ -12,9 +12,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { BatchUpdateForm } from "./BatchUpdateForm";
-import { BusinessData } from "@/types/business.types";
-
-type BusinessDataWithId = BusinessData & { id: string };
 
 export const OmTable: React.FC = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
@@ -23,9 +20,6 @@ export const OmTable: React.FC = () => {
   const observer = useRef<IntersectionObserver | null>(null);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
-  const [newBusinessData, setNewBusinessData] = useState<BusinessDataWithId[]>(
-    []
-  );
 
   const lastItemRef = useCallback(
     (element: HTMLElement | null) => {
@@ -88,15 +82,6 @@ export const OmTable: React.FC = () => {
           <TableBody>
             {tableData.length > 0 ? (
               tableData.map((business) => {
-                const updatedBusinessData = newBusinessData.find(
-                  (newBusiness) => newBusiness.id === business.id
-                );
-                const url = updatedBusinessData?.url ?? business.url;
-                const location =
-                  updatedBusinessData?.location ?? business.location;
-                const retailer_name =
-                  updatedBusinessData?.retailer_name ?? business.retailer_name;
-                const count = updatedBusinessData?.count ?? business.count;
                 return (
                   <TableRow
                     className={`cursor-pointer ${
@@ -114,10 +99,10 @@ export const OmTable: React.FC = () => {
                     }}
                   >
                     <TableCell className="font-medium">{business.id}</TableCell>
-                    <TableCell>{url}</TableCell>
-                    <TableCell>{location}</TableCell>
-                    <TableCell>{retailer_name}</TableCell>
-                    <TableCell>{count}</TableCell>
+                    <TableCell>{business.url}</TableCell>
+                    <TableCell>{business.location}</TableCell>
+                    <TableCell>{business.retailer_name}</TableCell>
+                    <TableCell>{business.count}</TableCell>
                   </TableRow>
                 );
               })
@@ -140,17 +125,8 @@ export const OmTable: React.FC = () => {
       <BatchUpdateForm
         ids={selectedIds}
         open={open}
-        onClose={(updatedBusinessData) => {
+        onClose={() => {
           setOpen(false);
-          const updatedBusiness = selectedIds.map((id) => ({
-            id,
-            ...updatedBusinessData,
-          })) as BusinessDataWithId[];
-          const newBusinessDataFiltered = newBusinessData.filter(
-            (business) => !selectedIds.includes(business.id)
-          );
-          setNewBusinessData([...updatedBusiness, ...newBusinessDataFiltered]);
-
           setSelectedIds([]);
         }}
       />
