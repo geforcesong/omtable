@@ -13,12 +13,12 @@ export interface UseFetchOptions {
   signal?: AbortSignal;
 }
 
-export type UseFetchReturn<T> = FetchState<T>;
+export type FetchReturnType<T> = FetchState<T>;
 
 function useFetch<T = unknown>(
   url: string,
   options: UseFetchOptions = {}
-): UseFetchReturn<T> {
+): FetchReturnType<T> {
   const [state, setState] = useState<FetchState<T>>({
     data: null,
     loading: true,
