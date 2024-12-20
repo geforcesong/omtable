@@ -23,7 +23,7 @@ const UserContext = createContext<UserContextType | null>(null);
 export const useUserContext = (): UserContextType => {
   const context = useContext(UserContext);
   if (context === null) {
-    throw new Error("useUserContext must be used within a UserContextProvider");
+    throw new Error("UserContext must be used within a UserContextProvider");
   }
   return context;
 };
