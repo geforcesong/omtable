@@ -14,14 +14,14 @@ const reducer = (state: State, action: ActionBase): State => {
   if (action.type === ActionType.UpdateAge) {
     return {
       ...state,
-      age: action.payload,
+      age: action.payload as number,
     };
   }
 
   if (action.type === ActionType.UpdateName) {
     return {
       ...state,
-      name: action.payload,
+      name: action.payload as string,
     };
   }
 

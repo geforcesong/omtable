@@ -1,6 +1,6 @@
 export interface ActionBase<T = string> {
   type: T;
-  payload: any;
+  payload: unknown;
 }
 
 export enum ActionType {
