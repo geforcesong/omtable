@@ -17,7 +17,8 @@ export default function ContextTest() {
           placeholder="Name"
         />
         <input
-          type="text"
+          type="number"
+          onFocus={(e) => e.target.select()}
           value={user.age}
           onChange={(e) => setAge(Number(e.target.value))}
           placeholder="Age"
